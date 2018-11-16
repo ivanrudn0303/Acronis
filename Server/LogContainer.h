@@ -6,6 +6,7 @@
 #include <cstdint>
 
 #define ERROR_NO_LOG 1
+#define ERROR_EXIST_LOG 4
 
 struct Log
 {
@@ -23,6 +24,7 @@ public:
 	int Update(const char*, uint32_t);
 	int Register(const char*);
 	int Unregister(const char*);
+	int SomeAction();
 	void Lock();
 	void Unlock();
 };
