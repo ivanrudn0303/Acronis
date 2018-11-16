@@ -66,11 +66,6 @@ int Server::Start()
 		WSACleanup();
 		return SOCKET_ERROR;
 	}
-//	Container.Register("prev");
-//	Container.Register("pal");
-//	Container.Update("pal", 5);
-//	Container.Register("next");
-//	Container.Update("next", 3);
 
 	std::thread PeriodicUpdater(PeriodicFunction, &Container);
 
@@ -96,10 +91,6 @@ void Respond(SOCKET sock, LogContainer* base, std::mutex* mute, std::stack<std::
 	int len = recv(sock, buf, BUF_SIZE, 0);
 	while ((len > 0) && (len != SOCKET_ERROR))
 	{
-		//		std::cout << "new client\n";
-		printf("length: %d\n%s\n", len, buf);
-		//	Sleep(100);
-			//responds on http requests
 		base->Lock();
 		Handler(sock, base, buf, len);
 		base->Unlock();
@@ -162,6 +153,7 @@ int Handler(SOCKET sock, LogContainer *base, char *buf, int len)
 	if(len == BUF_SIZE)
 		return ERROR_BUF_OVERFLOW;
 	buf[len] = '\0';
+	printf("length: %d\n%s\n", len, buf);
 	while ((buf != nullptr) && (*buf != '\0'))
 	{
 
