@@ -1,0 +1,58 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Client",
+    "description" : "Client Requests log registration",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "paths" : {
+    "/log" : {
+      "put" : {
+        "parameters" : [ {
+          "name" : "UpdatePeriod",
+          "in" : "query",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        }
+      },
+      "post" : {
+        "responses" : {
+          "201" : {
+            "description" : "Created"
+          },
+          "409" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "delete" : {
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "components" : { }
+}
