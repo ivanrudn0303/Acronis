@@ -1,58 +1,46 @@
-{
-  "openapi" : "3.0.0",
-  "info" : {
-    "title" : "Client",
-    "description" : "Client Requests log registration",
-    "version" : "1.0.0"
-  },
-  "servers" : [ {
-    "url" : "http://localhost:7800/"
-  } ],
-  "paths" : {
-    "/log" : {
-      "put" : {
-        "parameters" : [ {
-          "name" : "UpdatePeriod",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "minimum" : 1,
-            "type" : "integer",
-            "format" : "int32"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        }
-      },
-      "post" : {
-        "responses" : {
-          "201" : {
-            "description" : "Created"
-          },
-          "409" : {
-            "description" : "Bad Request"
-          }
-        }
-      },
-      "delete" : {
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        }
-      }
-    }
-  },
-  "components" : { }
-}
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Client'
+  description: 'Client Requests log registration'
+
+servers:
+  - url: http://localhost:7800/
+
+
+paths:
+  /{path}:
+    post:
+      responses:
+        '201':
+          description: 'Created'
+        '409':
+          description: 'Bad Request'
+    put:
+      responses:
+        '200':
+          description: 'OK'
+        '404':
+          description: 'Not Found'
+      parameters:
+      - in: 'query'
+        name: 'UpdatePeriod'
+        required: true
+        schema:
+          type: "integer"
+          minimum: 1
+    delete:
+      responses:
+        '200':
+          description: 'OK'
+        '404':
+          description: 'Not Found'
+    parameters:
+      - in: 'path'
+        name: 'path'
+        required: true
+        schema:
+          type: "string"
+          default: "file.txt"
+
+      
