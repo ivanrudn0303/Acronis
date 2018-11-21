@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Client'
+  description: 'Client Requests log registration'
+
+servers:
+  - url: http://localhost:7800/
+
+
+paths:
+  /Log/{id}:
+    put:
+      responses:
+        200:
+          description: 'OK'
+        404:
+          description: 'Not Found'
+        503:
+          description: 'Service Unavailable'
+
+    post:
+      responses:
+        201:
+          description: 'Created'
+        409:
+          description: 'Bad Request'
+        507:
+          description: 'Insufficient Storage'
+        503:
+          description: 'Service Unavailable'
+      parameters:
+      - in: 'query'
+        name: 'UpdatePeriod'
+        required: true
+        schema:
+          type: 'integer'
+          minimum: 1
+          default: 0xFFFFFFFF
+      - in: 'query'
+        name: 'Path'
+        required: true
+        schema:
+          type: 'string'
+
+    delete:
+      responses:
+        200:
+          description: 'OK'
+        404:
+          description: 'Not Found'
+        503:
+          description: 'Service Unavailable'
+    parameters:
+      - in: 'path'
+        name: 'id'
+        required: true
+        schema:
+          type: "integer"
