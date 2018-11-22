@@ -5,7 +5,7 @@ info:
   description: 'Client Requests log registration'
 
 servers:
-  - url: http://localhost:7800/
+  - url: http://93.175.1.27:7800/
 
 
 paths:
