@@ -2,51 +2,75 @@
 #include <ctime>
 #include <iostream>
 
-std::list<Log>::iterator Find(std::list<Log>*, const char*);
 
-int LogContainer::Update(const char* path, uint32_t period)
+int LogContainer::Register(const char* path, uint32_t id, uint32_t UpdateTime)
 {
-	if (Container.empty())
-		return ERROR_NO_LOG;
-	std::list<Log>::iterator Paste = Find(&Container, path);
-	if (Paste == Container.end())
-		return ERROR_NO_LOG;
-
-	Paste->UpdateTime = period + static_cast<uint32_t>(time(nullptr));
-	Paste->Period = period;
-	return 0;
-}
-
-int LogContainer::Register(const char* path)
-{
-	if ((!Container.empty()) && (Find(&Container, path) != Container.end()))
+	Lock();
+	if ((!Container.empty()) && (Container.find(id) != Container.end()))
+	{
+		Unlock();
 		return ERROR_EXIST_LOG;
-	Container.push_back({std::string(path), (uint32_t)(~0), (uint32_t)(~0)});
+	}
+	Container[id]= {std::string(path), static_cast<uint32_t>(time(nullptr)) + UpdateTime, UpdateTime};
+	Unlock();
 	return 0;
 }
 
-int LogContainer::Unregister(const char* path)
+int LogContainer::ForceFlush(uint32_t id)
 {
+	Lock();
+	if (Container.empty())
+	{
+		Unlock();
+		return ERROR_NO_LOG;
+	}
+	auto it = Container.find(id);
+	if (it == Container.end())
+	{
+		Unlock();
+		return ERROR_NO_LOG;
+	}
+	std::cout << "path: " << it->second.Path << "\ntime: " << it->second.UpdateTime << '\n';
+	it->second.UpdateTime = it->second.Period + static_cast<uint32_t>(time(nullptr));
+	Unlock();
+	return 0;
+}
+
+int LogContainer::Unregister(uint32_t id)
+{
+	Lock();
 	if(Container.empty())
+	{
+		Unlock();
 		return ERROR_NO_LOG;
-	auto it = Find(&Container, path);
+	}
+	auto it = Container.find(id);
 	if(it == Container.end())
+	{
+		Unlock();
 		return ERROR_NO_LOG;
+	}
 	Container.erase(it);
+	Unlock();
 	return 0;
 }
 
 int LogContainer::SomeAction()
 {
+	Lock();
 	uint32_t clock = static_cast<uint32_t>(time(nullptr));
 	if (Container.empty())
+	{
+		Unlock();
 		return 0;
+	}
 	for(auto it = Container.begin(); it != Container.cend(); ++it)
-		if(clock > it->UpdateTime)
+		if(clock > it->second.UpdateTime)
 		{
-			std::cout << "path: " << it->Path << "\ntime: " << it->UpdateTime << '\n';
-			it->UpdateTime += it->Period;
+			std::cout << "path: " << it->second.Path << "\ntime: " << it->second.UpdateTime << '\n';
+			it->second.UpdateTime += it->second.Period;
 		}
+	Unlock();
 	return 0;
 }
 
@@ -58,12 +82,4 @@ void LogContainer::Lock()
 void LogContainer::Unlock()
 {
 	Mutex.unlock();
-}
-
-std::list<Log>::iterator Find(std::list<Log>* List, const char *path)
-{
-	for (auto it = List->begin(); it != List->end(); ++it)
-		if (it->Path == path)
-			return it;
-	return List->end();
 }
