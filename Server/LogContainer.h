@@ -1,7 +1,7 @@
 #ifndef LOGCONTAINER_H
 #define LOGCONTAINER_H
 #include <mutex>
-#include <list>
+#include <unordered_map>
 #include <string>
 #include <cstdint>
 
@@ -19,11 +19,11 @@ class LogContainer
 {
 private:
 	std::mutex Mutex;
-	std::list<Log> Container;
+	std::unordered_map<uint32_t, Log> Container;
 public:
-	int Update(const char*, uint32_t);
-	int Register(const char*);
-	int Unregister(const char*);
+	int Register(const char*, uint32_t, uint32_t);
+	int ForceFlush(uint32_t);
+	int Unregister(uint32_t);
 	int SomeAction();
 	void Lock();
 	void Unlock();
