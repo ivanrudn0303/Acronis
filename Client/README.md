@@ -1,9 +1,9 @@
 Requests:
-  SET
-  REGISTER
-  UNREGISTER
+  PUT
+  POST
+  DELETE
 
 Examples:
-  REGISTER Log.txt HTTP/2.0   //register new log
-  SET Log.txt?UpdatePeriod=4 HTTP/2.0   //setting the period of updating
-  UNREGISTER Log.txt HTTP/2.0   //unregister from log storage
+  POST HTTP/1.1 /Log/6?UpdatePeriod=25&Path=fileName.txt   //register fileName.txt with updatePer = 25 and id = 6
+  PUT HTTP/1.1 /Log/6   //flush log from file with id = 6
+  DELETE HTTP/1.1 /Log/6   //delete log with id = 6
