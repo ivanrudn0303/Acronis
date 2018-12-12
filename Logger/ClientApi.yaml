@@ -1,0 +1,94 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Client'
+  description: 'Client Requests log registration'
+
+servers:
+  - url: http://93.175.1.27:7800/
+
+
+paths:
+  /Log/:
+    put:
+      responses:
+        200:
+          description: 'OK'
+        404:
+          description: 'Not Found'
+        503:
+          description: 'Service Unavailable'
+      requestBody:
+        content:
+          request/json:
+            schema:
+              type: 'object'
+              properties:
+                  State:
+                    type: 'integer'
+                    format: 'int32'
+                  Data:
+                    type: 'string'
+                        
+      parameters: 
+      - in: 'query'
+        name: 'ComponentId'
+        required: true
+        schema:
+          type: 'integer'
+          format: 'int32'
+          
+    post:
+      responses:
+        201:
+          description: 'Created'
+          content:
+            respond/json:
+              schema:
+                type: 'object'
+                properties:
+                  ComponentId:
+                    type: 'integer'
+                    format: 'int32'
+                  DesiredUpdTime:
+                    type: 'integer'
+                    format: 'int32'
+        409:
+          description: 'Bad Request'
+        507:
+          description: 'Insufficient Storage'
+        503:
+          description: 'Service Unavailable'
+      parameters:
+      - in: 'query'
+        name: 'ComponentName'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'query'
+        name: 'User'
+        required: true
+        schema:
+          type: 'string'
+      - in: 'query'
+        name: 'State'
+        required: true
+        schema:
+          type: 'integer'
+          format: 'int32'
+
+    delete:
+      responses:
+        200:
+          description: 'OK'
+        404:
+          description: 'Not Found'
+        503:
+          description: 'Service Unavailable'
+      parameters:
+      - in: 'query'
+        name: 'ComponentId'
+        required: true
+        schema:
+          type: 'integer'
+          format: 'int32'
