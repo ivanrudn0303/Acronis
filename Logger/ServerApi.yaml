@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Server'
+  description: 'Client Requests log registration'
+
+servers:
+  - url: http://93.175.1.27:7800/
+
+
+paths:
+  /Log/:
+    get:
+      responses:
+        200:
+          description: 'OK'
+          content:
+            request/json:
+              schema:
+                type: 'object'
+                properties:
+                  State:
+                    type: 'integer'
+                    format: 'int32'
+                  Machine:
+                    type: 'array'
+                    items:
+                      type: 'object'
+                      properties:
+                        Id:
+                          type: 'integer'
+                          format: 'int32'
+                        Name:
+                          type: 'string'
+                        Componets:
+                          type: 'array'
+                          items:
+                            type: 'object'
+                            properties:
+                              user:
+                                type: 'string'
+                              Name:
+                                type: 'string'
+                              Id:
+                                type: 'integer'
+                                format: 'int32'
+                              State:
+                                type: 'integer'
+                                format: 'int32'
+                              Data:
+                                type: 'string'
+        404:
+          description: 'Not Found'
+        503:
+          description: 'Service Unavailable'
+      parameters:
+      - in: 'query'
+        name: 'MachineId'
+        required: true
+        schema:
+          type: 'integer'
+          format: 'int32'
+      - in: 'query'
+        name: 'ComponentId'
+        required: true
+        schema:
+          type: 'integer'
+          format: 'int32'
+          
+    options:
+      responses:
+        200:
+          description: 'Created'
+        409:
+          description: 'Bad Request'
+        507:
+          description: 'Insufficient Storage'
+        503:
+          description: 'Service Unavailable'
+      requestBody:
+        content:
+          request/json:
+            schema:
+              type: 'object'
+              properties:
+                MachineUpdTime:
+                  type: 'integer'
+                  format: 'int32'
+
+    parameters:
+    - in: 'query'
+      name: 'totenAuth'
+      required: true
+      schema:
+        type: 'string'
+        
+  /BlockList/:
+    get:
+      responses:
+        200:
+          description: 'OK'
+          content:
+            request/json:
+              schema:
+                type: 'object'
+                properties:
+                  MachinePermit:
+                    type: 'array'
+                    items:
+                      type: 'object'
+                      properties:
+                        Id:
+                          type: 'integer'
+                          format: 'int32'
+                        Until:
+                          type: 'string'
+                          format: 'date'
+        404:
+          description: 'Not Found'
+        503:
+          description: 'Service Unavailable'
+    put:
+      responses:
+        200:
+          description: 'OK'
+        404:
+          description: 'Not Found'
+        503:
+          description: 'Service Unavailable'
+      parameters:
+      - in: 'query'
+        name: 'Until'
+        required: true
+        schema:
+          type: 'string'
+          format: 'date'
+      - in: 'query'
+        name: 'Id'
+        required: true
+        schema:
+          type: 'integer'
+          format: 'int32'
+        
+          
+    parameters:
+    - in: 'query'
+      name: 'totenAuth'
+      required: true
+      schema:
+        type: 'string'
