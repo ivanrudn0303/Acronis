@@ -1,8 +1,9 @@
 Task1:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-          packages:
-            - g++-4.9
+  language: cpp
+    include:
+      - os: linux
+        addons:
+          apt:
+            sources:
+            packages:
+             - g++-4.9
