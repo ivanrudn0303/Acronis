@@ -1,1 +1,4 @@
-g++ -o out ./Sem6/IndustrialProgramming/Task1/main.cpp
+all: out
+
+out:
+  g++ -o out ./Sem6/IndustrialProgramming/Task1/main.cpp
