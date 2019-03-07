@@ -1,7 +1,7 @@
 Task1:
-  language: cpp
     include:
       - os: linux
+      - language: cpp
         addons:
           apt:
             sources:
