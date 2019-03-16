@@ -22,7 +22,6 @@ int main()
 
 	for (const auto& el : res)
 		std::cout << el.c_str() << '\n';
-	system("PAUSE");
 	return 0;
 }
 
