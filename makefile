@@ -1,6 +1,8 @@
+CC = g++
+flag = -std=c++14
 all: out
 
 out:
-	g++ -o out ./Sem6/IndustrialProgramming/Task1/main.cpp
+	${CC} -o out ${flag} ./Sem6/IndustrialProgramming/Task1/main.cpp
 test: out
 	echo "nice"
