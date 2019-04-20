@@ -31,33 +31,27 @@
                                     <constraint firstAttribute="width" secondItem="4M9-8d-pPb" secondAttribute="height" multiplier="125:72" id="TlI-ZY-J01"/>
                                 </constraints>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj4-wa-WFa">
-                                <rect key="frame" x="166" y="323" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="fj4-wa-WFa" secondAttribute="height" multiplier="2:1" id="ZQD-30-gWB"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj4-wa-WFa">
+                                <rect key="frame" x="151" y="276" width="73" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sTy-G8-2K3">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sTy-G8-2K3">
+                                <rect key="frame" x="177.5" y="276.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="HmZ-De-J8G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7li-M1-16n"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fj4-wa-WFa" secondAttribute="trailing" constant="167" id="8b6-Q9-R78"/>
-                            <constraint firstItem="4M9-8d-pPb" firstAttribute="top" secondItem="fj4-wa-WFa" secondAttribute="bottom" constant="107" id="9IK-QR-ctc"/>
-                            <constraint firstItem="sTy-G8-2K3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="IJE-bx-qME"/>
-                            <constraint firstItem="4M9-8d-pPb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="JDc-tR-3v0"/>
-                            <constraint firstItem="fj4-wa-WFa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="P43-ZI-CQP"/>
-                            <constraint firstItem="4M9-8d-pPb" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Pl6-lA-Vq7"/>
-                            <constraint firstItem="HmZ-De-J8G" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="V1P-3O-75J"/>
-                            <constraint firstItem="4M9-8d-pPb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fHb-KB-xl0"/>
-                            <constraint firstItem="fj4-wa-WFa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="166" id="vvd-w8-ieB"/>
-                            <constraint firstItem="HmZ-De-J8G" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="wbB-pr-zJj"/>
-                            <constraint firstItem="sTy-G8-2K3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xDV-aT-0i1"/>
+                            <constraint firstItem="sTy-G8-2K3" firstAttribute="centerY" secondItem="fj4-wa-WFa" secondAttribute="centerY" id="8Sc-HN-fUb"/>
+                            <constraint firstItem="fj4-wa-WFa" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="9Sg-Ka-WqF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4M9-8d-pPb" secondAttribute="bottom" id="GWH-zH-cs5"/>
+                            <constraint firstItem="fj4-wa-WFa" firstAttribute="top" secondItem="HmZ-De-J8G" secondAttribute="bottom" constant="40" id="K3g-hF-wnS"/>
+                            <constraint firstItem="4M9-8d-pPb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="P0z-ss-j3K"/>
+                            <constraint firstItem="HmZ-De-J8G" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="T4U-wU-mXA"/>
+                            <constraint firstItem="HmZ-De-J8G" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Wqf-ch-h7W"/>
+                            <constraint firstItem="sTy-G8-2K3" firstAttribute="centerX" secondItem="fj4-wa-WFa" secondAttribute="centerX" id="o1b-ZE-Qef"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fj4-wa-WFa" secondAttribute="trailing" constant="151" id="xpq-hN-HBy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -70,6 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="360.80000000000001" y="102.99850074962519"/>
         </scene>
     </scenes>
 </document>

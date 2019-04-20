@@ -10,14 +10,13 @@ import UIKit
 
 class Searcher
 {
-    var m_base:String
-    var m_current:String
+    var currencies = [String(), String()]
     var m_url:URL
     var m_urlSession:URLSession
     
     init(_ base: String, current: String) {
-        m_base = base
-        m_current = current
+        currencies[0] = base
+        currencies[1] = current
         m_url = URL(string: "https://api.exchangeratesapi.io/latest?base=CHF")!
         m_urlSession = URLSession.shared
         
@@ -25,6 +24,7 @@ class Searcher
     }
     func HttpsRequest(_ view: ViewController) -> Void
     {
+        weak var weakView = view
         let Request = URLRequest(url: m_url)
         let task = m_urlSession.dataTask(with: Request as URLRequest, completionHandler: { data, response, error in
             
@@ -41,9 +41,9 @@ class Searcher
                 if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
                     if let array = json["rates"] as? [String:Double]
                     {
-                        DispatchQueue.main.async{
-                            view.Output.text = String(array[self.m_current]! / array[self.m_base]!)
-                            view.StatusIndicator.stopAnimating()
+                        DispatchQueue.main.sync{[weak that = weakView] in
+                            that!.Output.text = String(array[that!.m_searcher.currencies[1]]! / array[that!.m_searcher.currencies[0]]!)
+                            that!.StatusIndicator.stopAnimating()
                         }
                     }
                 }
@@ -66,14 +66,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == self.CurrencyPicker[0] { self.m_searcher.m_base = self.CurrencyList[row]}
-        else {self.m_searcher.m_current = self.CurrencyList[row]}
+        m_searcher.currencies[CurrencyPicker.index(of: pickerView)!] = CurrencyList[row]
         
-        self.StatusIndicator.startAnimating()
-        self.Output.text = ""
-        self.m_searcher.HttpsRequest(self)
+        StatusIndicator.startAnimating()
+        Output.text = ""
+        m_searcher.HttpsRequest(self)
         
-        return self.CurrencyList[row]
+        return CurrencyList[row]
     }
 
     
