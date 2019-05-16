@@ -16,3 +16,4 @@ for chr in stones{
 }
 
 print(count)
+

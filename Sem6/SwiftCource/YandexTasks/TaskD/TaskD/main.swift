@@ -27,5 +27,7 @@ func FindLecem(_ str: String, _ n: Int)->Void{
     if((close < n) && (open > close)){FindLecem(str + ")", n)}
 }
 
-FindLecem("", 3)
+if let n = Int(readLine()!){
+    FindLecem("", n)
+}
 

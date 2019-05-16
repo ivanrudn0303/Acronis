@@ -13,10 +13,10 @@ var tmp = 0
 var prev:Int?
 
 for _ in 0..<n{
-    print("\u{001B}[0;32m", terminator: "")
     tmp = Int(readLine()!)!
     if(tmp != prev){
-        print("\u{001B}[0;31m\(tmp)")
+        print(String(tmp))
         prev = tmp
     }
 }
+

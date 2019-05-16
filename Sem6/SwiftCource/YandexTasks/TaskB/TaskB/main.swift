@@ -24,3 +24,4 @@ for _ in 0..<count{
 }
 
 print(min)
+
