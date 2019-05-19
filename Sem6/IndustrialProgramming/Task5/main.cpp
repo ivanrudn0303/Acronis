@@ -2,6 +2,8 @@
 #include <string>
 #include <iostream>
 
+#define MAXSTR 64
+
 int ProcessLogin(const std::string& login);
 int ProcessPass(const std::string& password);
 bool ProcessCred(const std::string& login, const std::string& password);
@@ -11,9 +13,15 @@ int main()
 {
 	std::string login;
 	std::cin >> login;
-	char c[32] = {0};
-	if(bruteforce(login, c, 3))
+	char c[MAXSTR] = {0};
+	if(bruteforce(login, c, 5))
 		std::cout << c << std::endl;
+	std::string tmp = "YYYY";
+	for (int i = 0; i < 9; ++i)
+	{
+		std::cout << c << tmp << std::endl;
+		tmp += "YYYY";
+	}
 	system("PAUSE");
 }
 
@@ -33,8 +41,8 @@ int ProcessLogin(const std::string &login)
 					//--some asm:--
 				temp &= 1;
 				temp = -temp;
-				result >>= 1;
-				temp &= 0xedb88320;
+				result = (uint32_t)result >> 1;
+				temp &= 0xEDB88320;
 					//--asm end--
 
 				result ^= temp;
@@ -82,7 +90,7 @@ bool bruteforce(const std::string& login, char * str, int depth)
 	{
 		if ((c > 9 && c < 'A') || (c > 'Z' && c < 'a'))
 			continue;
-		memset(str + len, 0, 32 - len);
+		memset(str + len, 0, MAXSTR - len);
 		str[len] = c;
 		if (ProcessCred(login, str))
 			return str;
